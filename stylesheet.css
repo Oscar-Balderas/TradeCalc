@@ -1,0 +1,760 @@
+/* ==========================================
+   TRADECALC - GLASSMORPHISM
+   Diseño inspirado en el mapa mundial
+========================================== */
+
+/* ==========================================
+   1. VARIABLES GENERALES
+========================================== */
+
+:root {
+  --color-background: #b7b9bd;
+
+  --color-card: rgba(255, 255, 255, 0.48);
+
+  --color-font: #202a35;
+  --color-secondary: #566574;
+
+  --color-border: rgba(255, 255, 255, 0.65);
+
+  --color-primary: #345d79;
+  --color-success: #17617b;
+
+  --color-input: rgba(255, 255, 255, 0.42);
+
+  --font-primary: "Segoe UI", Arial, sans-serif;
+
+  --border-radius: 14px;
+  --border-radius-input: 24px;
+
+  --shadow-card:
+    0 20px 65px rgba(24, 33, 43, 0.2), 0 4px 20px rgba(24, 33, 43, 0.08);
+}
+
+/* ==========================================
+   2. RESET GENERAL
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   3. FONDO - MAPA MUNDIAL
+========================================== */
+
+body {
+  min-height: 100vh;
+
+  background-color: var(--color-background);
+
+  background-image: url("./mapa-mundial.jpg");
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: var(--color-font);
+
+  font-family: var(--font-primary);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 40px 20px;
+}
+
+/* ==========================================
+   4. ELEMENTOS GENERALES
+========================================== */
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+input,
+select {
+  min-width: 0;
+}
+
+hr {
+  border: none;
+
+  border-top: 1px solid rgba(71, 87, 104, 0.2);
+
+  margin: 24px 0;
+}
+
+/* ==========================================
+   5. TARJETA PRINCIPAL DE CRISTAL
+========================================== */
+
+.tradecalc {
+  width: 100%;
+  max-width: 720px;
+
+  padding: 30px;
+
+  /* Cristal más transparente */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.38),
+    rgba(234, 240, 245, 0.24)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 18px;
+
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  /* Desenfoque moderado para apreciar el mapa */
+  -webkit-backdrop-filter: blur(12px) saturate(115%);
+  backdrop-filter: blur(12px) saturate(115%);
+}
+
+/* ==========================================
+   6. ENCABEZADO
+========================================== */
+
+.encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.encabezado__titulo {
+  font-size: 26px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+
+  color: #182735;
+}
+
+.encabezado__descripcion {
+  font-size: 13px;
+
+  color: var(--color-secondary);
+
+  margin-bottom: 20px;
+}
+
+/* ==========================================
+   7. DATOS DEL CONTRATO
+========================================== */
+
+.contrato {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.contratoMt,
+.contratoMes {
+  min-width: 0;
+}
+
+.lcontrato {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--color-font);
+}
+
+/* ==========================================
+   8. INPUTS DEL CONTRATO
+========================================== */
+
+.contrato input {
+  width: 100%;
+
+  padding: 12px 16px;
+
+  background: var(--color-input);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: var(--border-radius-input);
+
+  color: var(--color-font);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.55),
+    0 3px 12px rgba(29, 48, 65, 0.07);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
+}
+
+/* ==========================================
+   9. GRUPOS COMPRADOR Y VENDEDOR
+========================================== */
+
+.grupoComprador,
+.grupoVendedor {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.grupoComprador__titulo,
+.grupoVendedor__titulo {
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #1c2d3a;
+}
+
+.grupoCompradorSections,
+.grupoVendedorSections {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.grupoCompradorCom,
+.grupoCompradorInt,
+.grupoVendedorCom,
+.grupoVendedorInt {
+  min-width: 0;
+}
+
+.lgrupoComprador,
+.lgrupoVendedor {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--color-font);
+}
+
+/* ==========================================
+   10. INPUTS DE LOS GRUPOS
+========================================== */
+
+.grupoComprador input,
+.grupoVendedor input {
+  width: 100%;
+
+  padding: 12px 16px;
+
+  background: var(--color-input);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: var(--border-radius-input);
+
+  color: var(--color-font);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.55),
+    0 3px 12px rgba(29, 48, 65, 0.07);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
+}
+
+/* ==========================================
+   11. SUBTOTALES DE LOS GRUPOS
+========================================== */
+
+.grupoComprador__subtotal,
+.grupoVendedor__subtotal {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 13px;
+}
+
+.grupoComprador__subtotal p,
+.grupoVendedor__subtotal p {
+  color: var(--color-secondary);
+}
+
+.grupoComprador__subtotal strong,
+.grupoVendedor__subtotal strong {
+  font-size: 15px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  color: #203d52;
+}
+
+/* ==========================================
+   12. CÁLCULO DE COMISIONES
+========================================== */
+
+.CalculoComision {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.CalculoComision__titulo {
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #1c2d3a;
+}
+
+.CalculoComision__calcular {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+/* ==========================================
+   13. SELECTOR COMPRADOR / VENDEDOR
+========================================== */
+
+.CalculoComision__selector {
+  display: flex;
+
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 22px;
+}
+
+.lcalculoComision {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 14px;
+
+  color: var(--color-font);
+
+  cursor: pointer;
+}
+
+.lcalculoComision input[type="radio"] {
+  width: 16px;
+  height: 16px;
+
+  accent-color: var(--color-primary);
+
+  cursor: pointer;
+}
+
+/* ==========================================
+   14. RESULTADOS DE COMISIONES
+========================================== */
+
+.CalculoComision__resultados {
+  display: flex;
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+.CalculoComision__resultadosT {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.CalculoComision__resultadosT-sentence {
+  font-size: 12px;
+
+  color: var(--color-secondary);
+}
+
+.CalculoComision__resultadosT-results {
+  font-size: 24px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+
+  color: #1d435d;
+}
+
+/* ==========================================
+   15. INGRESOS MENSUALES Y TOTALES
+========================================== */
+
+.CalculoComision__ingresos {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.CalculoComision__ingresosM,
+.CalculoComision__ingresosCT {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.CalculoComision__ingresosS {
+  font-size: 12px;
+
+  color: var(--color-secondary);
+}
+
+.CalculoComision__ingresosQ {
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #1d435d;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   16. CONVERSOR DE DIVISAS
+========================================== */
+
+.ConversorComision {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin-top: 12px;
+
+  padding: 20px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.52),
+    rgba(222, 232, 240, 0.34)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: var(--border-radius);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 6px 20px rgba(35, 56, 74, 0.07);
+
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.ConversorComision__titulo {
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #1c2d3a;
+
+  margin-bottom: 4px;
+}
+
+.ConversorComision label {
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--color-font);
+}
+
+/* ==========================================
+   17. INPUTS DEL CONVERSOR
+========================================== */
+
+.ConversorComision select,
+.ConversorComision input {
+  width: 100%;
+
+  padding: 12px 16px;
+
+  background: rgba(255, 255, 255, 0.48);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: var(--border-radius-input);
+
+  color: var(--color-font);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    0 3px 12px rgba(29, 48, 65, 0.06);
+
+  outline: none;
+}
+
+.ConversorComision select option {
+  background: #edf2f6;
+
+  color: #202a35;
+}
+
+/* ==========================================
+   18. INFORMACIÓN DEL TIPO DE CAMBIO
+========================================== */
+
+.ConversorComision__nota {
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: var(--color-secondary);
+}
+
+/* ==========================================
+   19. RESULTADO DE CONVERSIÓN
+========================================== */
+
+.ConversorComision__resultado {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-top: 6px;
+}
+
+.ConversorComision__resultado p {
+  font-size: 12px;
+
+  color: var(--color-secondary);
+}
+
+.ConversorComision__resultado h3 {
+  font-size: 27px;
+  font-weight: 700;
+
+  color: var(--color-success);
+
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.35);
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   20. BOTÓN RESTABLECER
+========================================== */
+
+.tradecalc__acciones {
+  margin-top: 14px;
+}
+
+#reiniciar {
+  width: 100%;
+
+  padding: 13px 20px;
+
+  background: rgba(255, 255, 255, 0.43);
+
+  border: 1px solid rgba(255, 255, 255, 0.78);
+
+  border-radius: var(--border-radius-input);
+
+  color: #23394b;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 3px 12px rgba(35, 56, 74, 0.06);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+#reiniciar:hover {
+  background: rgba(255, 255, 255, 0.72);
+
+  border-color: rgba(69, 105, 132, 0.45);
+
+  box-shadow: 0 5px 16px rgba(35, 56, 74, 0.12);
+}
+
+/* ==========================================
+   21. ESTADOS DE LOS INPUTS
+========================================== */
+
+.contrato input:focus,
+.grupoComprador input:focus,
+.grupoVendedor input:focus,
+.ConversorComision input:focus,
+.ConversorComision select:focus {
+  background: rgba(255, 255, 255, 0.65);
+
+  border-color: #537c99;
+
+  box-shadow: 0 0 0 3px rgba(67, 113, 146, 0.18);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #345d79;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   22. TABLETS
+   768px o menos
+========================================== */
+
+@media (max-width: 768px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  .tradecalc {
+    max-width: 620px;
+    padding: 24px;
+  }
+
+  .encabezado__titulo {
+    font-size: 23px;
+  }
+
+  .CalculoComision__resultadosT-results {
+    font-size: 22px;
+  }
+
+  .CalculoComision__ingresosQ {
+    font-size: 18px;
+  }
+
+  .ConversorComision__resultado h3 {
+    font-size: 24px;
+  }
+}
+
+/* ==========================================
+   23. CELULARES
+   480px o menos
+========================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+
+    background-position: center center;
+    background-attachment: scroll;
+  }
+
+  .tradecalc {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .encabezado__titulo {
+    font-size: 22px;
+  }
+
+  .encabezado__descripcion {
+    font-size: 12px;
+  }
+
+  .contrato,
+  .grupoCompradorSections,
+  .grupoVendedorSections {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .grupoComprador__subtotal,
+  .grupoVendedor__subtotal {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .CalculoComision__selector {
+    gap: 16px;
+  }
+
+  .CalculoComision__resultadosT-results {
+    font-size: 21px;
+  }
+
+  .CalculoComision__ingresos {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .CalculoComision__ingresosQ {
+    font-size: 19px;
+  }
+
+  .ConversorComision {
+    padding: 15px;
+  }
+
+  .ConversorComision__resultado h3 {
+    font-size: 23px;
+  }
+
+  hr {
+    margin: 20px 0;
+  }
+}
+
+/* ==========================================
+   24. CELULARES MUY PEQUEÑOS
+   360px o menos
+========================================== */
+
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
+  .tradecalc {
+    padding: 14px;
+  }
+
+  .encabezado__titulo {
+    font-size: 20px;
+  }
+
+  .ConversorComision__resultado h3 {
+    font-size: 20px;
+  }
+}

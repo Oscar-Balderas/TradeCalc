@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradeCalc | Commodity Commission Calculator</title>
+    <link rel="stylesheet" href="./stylesheet.css" />
+  </head>
+
+  <body>
+    <main class="tradecalc">
+      <!-- Encabezado y datos del contrato -->
+      <section class="encabezado">
+        <h1 class="encabezado__titulo">TradeCalc</h1>
+        <p class="encabezado__descripcion">Commodity Commission Calculator</p>
+
+        <div class="contrato">
+          <div class="contratoMt">
+            <label class="lcontrato" for="contrato-metricT">
+              Monthly tonnes
+              <input
+                id="contrato-metricT"
+                type="number"
+                min="0"
+                step="any"
+                value="100000"
+              />
+            </label>
+          </div>
+
+          <div class="contratoMes">
+            <label class="lcontrato" for="contrato-mesesD">
+              Months of the contract
+              <input
+                id="contrato-mesesD"
+                type="number"
+                min="1"
+                step="1"
+                value="12"
+              />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- Grupo comprador -->
+      <section class="grupoComprador">
+        <h2 class="grupoComprador__titulo">Buying group</h2>
+
+        <div class="grupoCompradorSections">
+          <div class="grupoCompradorCom">
+            <label class="lgrupoComprador" for="grupoComprador-comision">
+              Commission USD/MT
+              <input
+                id="grupoComprador-comision"
+                type="number"
+                min="0"
+                step="any"
+                value="1"
+              />
+            </label>
+          </div>
+
+          <div class="grupoCompradorInt">
+            <label class="lgrupoComprador" for="grupoComprador-integrantes">
+              Members
+              <input
+                id="grupoComprador-integrantes"
+                type="number"
+                min="1"
+                step="1"
+                value="4"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="grupoComprador__subtotal">
+          <p>Per member and tonne</p>
+          <strong id="resultado-comprador">$0.2500 USD</strong>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- Grupo vendedor -->
+      <section class="grupoVendedor">
+        <h2 class="grupoVendedor__titulo">Sales group</h2>
+
+        <div class="grupoVendedorSections">
+          <div class="grupoVendedorCom">
+            <label class="lgrupoVendedor" for="grupoVendedor-comision">
+              Commission USD/MT
+              <input
+                id="grupoVendedor-comision"
+                type="number"
+                min="0"
+                step="any"
+                value="1"
+              />
+            </label>
+          </div>
+
+          <div class="grupoVendedorInt">
+            <label class="lgrupoVendedor" for="grupoVendedor-integrantes">
+              Members
+              <input
+                id="grupoVendedor-integrantes"
+                type="number"
+                min="1"
+                step="1"
+                value="4"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="grupoVendedor__subtotal">
+          <p>Per member and tonne</p>
+          <strong id="resultado-vendedor">$0.2500 USD</strong>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- Selección de grupo y resultados -->
+      <section class="CalculoComision">
+        <h2 class="CalculoComision__titulo">Which group do you belong to?</h2>
+
+        <div class="CalculoComision__calcular">
+          <div class="CalculoComision__selector">
+            <label class="lcalculoComision" for="lcalculoComisionOpc1">
+              <input
+                id="lcalculoComisionOpc1"
+                type="radio"
+                name="grupo"
+                value="comprador"
+                checked
+              />
+              Buyer
+            </label>
+
+            <label class="lcalculoComision" for="lcalculoComisionOpc">
+              <input
+                id="lcalculoComisionOpc"
+                type="radio"
+                name="grupo"
+                value="vendedor"
+              />
+              Seller
+            </label>
+          </div>
+
+          <div class="CalculoComision__resultados">
+            <div class="CalculoComision__resultadosT">
+              <p class="CalculoComision__resultadosT-sentence">
+                My commission per tonne
+              </p>
+              <h3
+                class="CalculoComision__resultadosT-results"
+                id="resultado-tonelada"
+              >
+                $0.2500 USD/MT
+              </h3>
+            </div>
+
+            <div class="CalculoComision__ingresos">
+              <div class="CalculoComision__ingresosM">
+                <p class="CalculoComision__ingresosS">Monthly income</p>
+                <h3 class="CalculoComision__ingresosQ" id="resultado-mensual">
+                  $25,000.00
+                </h3>
+              </div>
+
+              <div class="CalculoComision__ingresosCT">
+                <p class="CalculoComision__ingresosS">Total contract income</p>
+                <h3 class="CalculoComision__ingresosQ" id="resultado-total">
+                  $300,000.00
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversión de divisas -->
+      <section class="ConversorComision">
+        <h2 class="ConversorComision__titulo">Currency conversion</h2>
+
+        <label for="moneda-destino">Convert USD to</label>
+
+        <select id="moneda-destino" disabled>
+          <option value="">Loading currencies...</option>
+        </select>
+
+        <label for="tipo-cambio">
+          Exchange rate (destination currency per USD)
+        </label>
+
+        <input
+          id="tipo-cambio"
+          type="number"
+          min="0"
+          step="any"
+          placeholder="Loading exchange rate..."
+          readonly
+        />
+
+        <p
+          class="ConversorComision__nota"
+          id="estado-tipo-cambio"
+          aria-live="polite"
+        >
+          Loading exchange rate from Frankfurter API...
+        </p>
+
+        <div class="ConversorComision__resultado">
+          <p>Total contract commission converted</p>
+          <h3 id="resultado-conversion">MX$5,400,000.00</h3>
+        </div>
+      </section>
+
+      <!-- Botón de reinicio -->
+      <div class="tradecalc__acciones">
+        <button id="reiniciar" type="button">Reset example</button>
+      </div>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
